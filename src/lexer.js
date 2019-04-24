@@ -1,1 +1,1 @@
-export default str => str.split('')
+export default str => str.split(/(\ |\.)/);

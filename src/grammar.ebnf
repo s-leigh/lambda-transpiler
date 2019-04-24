@@ -1,0 +1,13 @@
+expr = lambda apply variable space unboundVariable
+
+lambda = "l" variable
+apply = "."
+
+(*TODO: add rest of alphabet except 'l'*)
+variable = "x" | "y"
+openParen = "("
+closeParen = ")"
+
+unboundVariable = openParen, variable, closeParen
+
+space = " "
