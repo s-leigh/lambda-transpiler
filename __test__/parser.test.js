@@ -6,11 +6,19 @@ describe('parser converts lexemes to objects', () => {
     // must stringify because matchers can't handle matching Symbols
     expect(JSON.stringify(result))
       .toEqual(JSON.stringify(
-        [
-          {variable: {val: 'x'}, succeedingToken: Symbol('apply')},
-          {val: 'x'},
-          {val: 'y'},
-        ]
+        {
+          symbolType: Symbol('lambda'),
+          variable: 'x',
+          apply: {
+            symbolType: Symbol('boundVariable'),
+            variable: 'x',
+            apply: {
+              symbolType: Symbol('unboundVariable'),
+              variable: 'y',
+              apply: null
+            }
+          }
+        }
       ))
   });
 });
