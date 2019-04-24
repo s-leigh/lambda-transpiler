@@ -1,0 +1,17 @@
+{
+    "defaultSeverity": "error",
+    "extends": "tslint:recommended",
+    "jsRules": {},
+    "linterOptions": {
+        "exclude": [
+            "*.ebnf"
+        ]
+    },
+    "rules": {
+        "quotemark": ["single"],
+        "trailing-comma": false,
+        "curly": false,
+        "max-classes-per-file": [false]
+    },
+    "rulesDirectory": []
+}
