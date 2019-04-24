@@ -1,34 +1,4 @@
-// TODO: break out into model dir with grammar
-
-const REGEXES = {
-  lambda: /l[a-km-z][.]/,
-  boundVariable: /[a-km-z] /,
-  unboundVariable: /\([a-km-z]\)/
-};
-
-class Lambda {
-  constructor(val, apply) {
-    this.symbolType = Symbol('lambda');
-    this.variable = val;
-    this.apply = apply;
-  }
-}
-
-class BoundVariable {
-  constructor(val, apply) {
-    this.symbolType = Symbol('boundVariable');
-    this.variable = val;
-    this.apply = apply;
-  }
-}
-
-class UnboundVariable {
-  constructor(val, apply) {
-    this.symbolType = Symbol('unboundVariable');
-    this.variable = val;
-    this.apply = apply;
-  }
-}
+import {REGEXES, Lambda, BoundVariable, UnboundVariable} from './model/model';
 
 export default (lexemes) => {
 

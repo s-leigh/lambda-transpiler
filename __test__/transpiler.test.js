@@ -1,9 +1,8 @@
-import parser from '../src/parser';
+import transpiler from '../src/transpiler';
 
-describe('parser converts lexemes to objects', () => {
+describe('transpiler converts AST to JS', () => {
   test('identity function', () => {
-    const result = parser(['lx.', 'x ' , '(y)']);
-    expect(result).toEqual({
+    const result = transpiler({
       symbolType: 'lambda',
       variable: 'x',
       apply: {
@@ -15,6 +14,7 @@ describe('parser converts lexemes to objects', () => {
           apply: null
         }
       }
-    })
+    });
+    expect(result).toEqual('(x => x)(y)')
   });
 });
