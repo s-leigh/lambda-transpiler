@@ -1,13 +1,12 @@
-expr = lambda apply variable space unboundVariable
+expr = lambda variable space unboundVariable
 
-lambda = "l" variable
-apply = "."
+lambda = "l" variable applyOrSpace
+space = " "
+applyOrSpace = "." | space
 
 (*TODO: add rest of alphabet except 'l'*)
 variable = "x" | "y"
 openParen = "("
 closeParen = ")"
 
-unboundVariable = openParen, variable, closeParen
-
-space = " "
+unboundVariable = openParen variable closeParen
