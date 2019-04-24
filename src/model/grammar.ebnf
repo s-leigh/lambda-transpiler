@@ -4,8 +4,12 @@ lambda = "l" variable applyOrSpace
 space = " "
 applyOrSpace = "." | space
 
-(*TODO: add rest of alphabet except 'l'*)
-variable = "x" | "y"
+(* Every letter except 'l' for 'lambda' *)
+variable =  "a" | "b" | "c" | "d" | "e" |
+            "f" | "g" | "h" | "i" | "j" |
+            "k" |       "m" | "n" | "o" |
+            "p" | "q" | "r" | "s" | "t" |
+            "u" | "v" | "w" | "x" | "y" | "z"
 openParen = "("
 closeParen = ")"
 

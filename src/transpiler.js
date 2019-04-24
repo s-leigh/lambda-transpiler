@@ -16,5 +16,5 @@ export default (ast) => {
       return recurse(`(${node.variable})`)
     }
   };
-  return  handleNode(ast, '');
+  return handleNode(ast, '');
 }
