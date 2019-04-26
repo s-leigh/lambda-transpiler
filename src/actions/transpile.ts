@@ -7,7 +7,7 @@ export default (ast: IExpression | null): string => {
     const recurse = (newExpression: string): string => handleNode(node.apply, expression.concat(newExpression));
 
     if (node.symbolType === LAMBDA) {
-      return recurse(`(${node.variable} => `);
+      return recurse(`${node.variable} => `);
     }
     if (node.symbolType === BOUND_VARIABLE) {
       return recurse(`${node.variable})`);
@@ -17,5 +17,5 @@ export default (ast: IExpression | null): string => {
     }
     throw new Error(`Unknown symbol type ${node.symbolType}`);
   };
-  return handleNode(ast, '');
+  return handleNode(ast, '(');
 };

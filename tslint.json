@@ -8,11 +8,16 @@
         ]
     },
     "rules": {
-        "quotemark": ["single"],
+        "quotemark": [
+            "single"
+        ],
         "trailing-comma": false,
         "curly": false,
-        "max-classes-per-file": [false],
-        "no-console": false
+        "max-classes-per-file": [
+            false
+        ],
+        "no-console": false,
+        "object-literal-sort-keys": false
     },
     "rulesDirectory": []
 }
