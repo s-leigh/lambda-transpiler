@@ -12,7 +12,7 @@ describe('transpiler converts AST to JS', () => {
         apply: null
       }
     });
-    expect(result).toEqual('(x => x)');
+    expect(result.toString()).toEqual('x => x');
   });
 
   test('constant function', () => {
@@ -29,7 +29,7 @@ describe('transpiler converts AST to JS', () => {
         }
       }
     });
-    expect(result).toEqual('(x => y => x)');
+    expect(result.toString()).toEqual('x => y => x');
   });
 
 });

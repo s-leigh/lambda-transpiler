@@ -1,6 +1,6 @@
 import {BOUND_VARIABLE, IExpression, LAMBDA} from '../model/model';
 
-export default (ast: IExpression | null): string => {
+export default (ast: IExpression | null): Function => {
   const handleNode = (node: IExpression | null, expression: string): string => {
     if (node === null) return expression;
 
@@ -14,5 +14,5 @@ export default (ast: IExpression | null): string => {
     }
     throw new Error(`Unknown symbol type ${node.symbolType}`);
   };
-  return handleNode(ast, '(');
+  return eval(handleNode(ast, '('));
 };
