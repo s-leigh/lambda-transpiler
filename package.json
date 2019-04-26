@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "lint": "./node_modules/tslint/bin/tslint --project tslint.json",
+    "start": "node src/process.js",
     "test": "./node_modules/typescript/bin/tsc && ./node_modules/jest/bin/jest.js",
     "tsc": "npx tsc"
   },

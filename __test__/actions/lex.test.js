@@ -1,4 +1,4 @@
-import lexer from '../src/actions/lexer';
+import lexer from '../../src/actions/lex';
 
 describe('lexer splits strings into lexemes', () => {
   test('identity function', () => {

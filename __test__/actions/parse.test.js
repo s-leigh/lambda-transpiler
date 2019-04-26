@@ -1,4 +1,4 @@
-import parser from '../src/actions/parser';
+import parser from '../../src/actions/parse';
 
 describe('parser converts lexemes to objects', () => {
   test('identity function', () => {

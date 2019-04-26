@@ -1,6 +1,6 @@
 import {BOUND_VARIABLE, IExpression, LAMBDA, UNBOUND_VARIABLE} from '../model/model';
 
-export default (ast: IExpression): string => {
+export default (ast: IExpression | null): string => {
   const handleNode = (node: IExpression | null, expression: string): string => {
     if (node === null) return expression;
 

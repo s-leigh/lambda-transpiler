@@ -1,4 +1,4 @@
-import transpiler from '../src/actions/transpiler';
+import transpiler from '../../src/actions/transpile';
 
 describe('transpiler converts AST to JS', () => {
   test('identity function', () => {
