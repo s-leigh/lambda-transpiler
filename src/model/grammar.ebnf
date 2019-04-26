@@ -1,4 +1,4 @@
-expr = lambda variable space unboundVariable
+expr = {lambda variable [apply]} [space unboundVariable]
 
 lambda = "l" variable applyOrSpace
 space = " "

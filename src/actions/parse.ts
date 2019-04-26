@@ -5,12 +5,12 @@ export default (lexemes: string[]): IExpression => {
   const handleLexeme = (lexeme: string, index: number, lexemeArray: string[]): IExpression => {
     const nextIndex = index + 1;
     const nextLexeme = lexemeArray[nextIndex];
-    // lx[. ]
+    // lx[. ?]
     const parseLambda = (token: string): IExpression => {
-      return new Lambda(token[1], handleLexeme(nextLexeme, nextIndex, lexemeArray));
+      return new Lambda(token[1], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
     };
     const parseBoundVariable = (token: string): IExpression => {
-      return new BoundVariable(token[0], handleLexeme(nextLexeme, nextIndex, lexemeArray));
+      return new BoundVariable(token[0], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
     };
     // (y)
     const parseUnboundVariable = (token: string): IExpression => {

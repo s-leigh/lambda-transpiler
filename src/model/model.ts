@@ -1,5 +1,5 @@
 export const REGEXES = {
-  boundVariable: /[a-km-z] /,
+  boundVariable: /[a-km-z]( ?)(?!.)/,
   lambda: /l[a-km-z][.]/,
   unboundVariable: /\([a-km-z]\)/
 };

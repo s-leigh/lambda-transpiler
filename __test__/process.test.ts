@@ -7,14 +7,9 @@ describe('processor transforms raw lambda to JS', () => {
       .toEqual('(x => x)(y)');
   });
 
-  test('misc simple function', () => {
-    expect(process('lx.y (z)'))
-      .toEqual('(x => y)(z)');
-  });
-
-  test('curried functions', () => {
-    expect(process('la.lb.c (x)'))
-      .toEqual('(a => b => c)(x)');
+  test('constant function', () => {
+    expect(process('lx.ly.x'))
+      .toEqual('(x => y => x)');
   });
 
 });
