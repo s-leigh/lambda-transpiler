@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "lint": "./node_modules/tslint/bin/tslint --project tslint.json",
-    "test": "./node_modules/jest/bin/jest.js"
+    "test": "./node_modules/typescript/bin/tsc && ./node_modules/jest/bin/jest.js",
+    "tsc": "npx tsc"
   },
   "author": "Stephen Leigh",
   "license": "ISC",
@@ -12,6 +13,7 @@
     "@babel/core": "7.4.3",
     "@babel/preset-env": "7.4.3",
     "@babel/preset-typescript": "7.3.3",
+    "@babel/types": "7.4.0",
     "@types/jest": "24.0.11",
     "babel-jest": "24.7.1",
     "jest": "24.7.1",

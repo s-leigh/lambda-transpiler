@@ -1,20 +1,19 @@
-import {Error} from "tslint/lib/error";
-import {BoundVariable, IExpression, Lambda, REGEXES, UnboundVariable} from './model/model';
+import {BoundVariable, IExpression, Lambda, REGEXES, UnboundVariable} from '../model/model';
 
-export default (lexemes): IExpression => {
+export default (lexemes: string[]): IExpression | null => {
 
-  const handleLexeme = (lexeme: string, index: number, lexemeArray: string[]): IExpression => {
+  const handleLexeme = (lexeme: string, index: number, lexemeArray: string[]): IExpression | null => {
     const nextIndex = index + 1;
     const nextLexeme = lexemeArray[nextIndex];
     // lx[. ]
-    const parseLambda = (token: string) => {
+    const parseLambda = (token: string): IExpression | null => {
       return new Lambda(token[1], handleLexeme(nextLexeme, nextIndex, lexemeArray));
     };
     const parseBoundVariable = (token: string) => {
       return new BoundVariable(token[0], handleLexeme(nextLexeme, nextIndex, lexemeArray));
     };
     // (y)
-    const parseUnboundVariable = (token: string) => {
+    const parseUnboundVariable = (token: string): IExpression | null => {
       return new UnboundVariable(token[1], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
     };
 
