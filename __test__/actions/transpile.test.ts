@@ -9,14 +9,10 @@ describe('transpiler converts AST to JS', () => {
       apply: {
         symbolType: 'boundVariable',
         variable: 'x',
-        apply: {
-          symbolType: 'unboundVariable',
-          variable: 'y',
-          apply: null
-        }
+        apply: null
       }
     });
-    expect(result).toEqual('(x => x)(y)');
+    expect(result).toEqual('(x => x)');
   });
 
   test('constant function', () => {

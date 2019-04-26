@@ -1,4 +1,4 @@
-import {BoundVariable, IExpression, Lambda, REGEXES, UnboundVariable} from '../model/model';
+import {BoundVariable, IExpression, Lambda, REGEXES} from '../model/model';
 
 export default (lexemes: string[]): IExpression => {
 
@@ -12,15 +12,10 @@ export default (lexemes: string[]): IExpression => {
     const parseBoundVariable = (token: string): IExpression => {
       return new BoundVariable(token[0], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
     };
-    // (y)
-    const parseUnboundVariable = (token: string): IExpression => {
-      return new UnboundVariable(token[1], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
-    };
 
     const returnable: Array<(token: string) => IExpression> = [];
     if (lexeme.match(REGEXES.lambda)) returnable.push(parseLambda);
     if (lexeme.match(REGEXES.boundVariable)) returnable.push(parseBoundVariable);
-    if (lexeme.match(REGEXES.unboundVariable)) returnable.push(parseUnboundVariable);
     if (returnable.length > 1) throw new Error(
       `Parser returned more than one possible interpretation for lexeme:
       '${lexeme}'

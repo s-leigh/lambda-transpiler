@@ -6,7 +6,6 @@ export const REGEXES = {
 
 export const LAMBDA = 'lambda';
 export const BOUND_VARIABLE = 'boundVariable';
-export const UNBOUND_VARIABLE = 'unboundVariable';
 
 export class Lambda implements IExpression {
   public symbolType = LAMBDA;
@@ -20,16 +19,6 @@ export class Lambda implements IExpression {
 
 export class BoundVariable implements IExpression {
   public symbolType = BOUND_VARIABLE;
-  public variable: string;
-  public apply: IExpression | null;
-  constructor(val: string, apply: IExpression | null) {
-    this.variable = val;
-    this.apply = apply;
-  }
-}
-
-export class UnboundVariable implements IExpression {
-  public symbolType = UNBOUND_VARIABLE;
   public variable: string;
   public apply: IExpression | null;
   constructor(val: string, apply: IExpression | null) {

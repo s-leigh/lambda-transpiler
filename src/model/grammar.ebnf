@@ -1,8 +1,7 @@
-expr = {lambda variable [apply]} [space unboundVariable]
+expr = {lambda variable [apply] [openParen] [closeParen]};
 
-lambda = "l" variable applyOrSpace
-space = " "
-applyOrSpace = "." | space
+lambda = "l";
+apply = ".";
 
 (* Every letter except 'l' for 'lambda' *)
 variable =  "a" | "b" | "c" | "d" | "e" |
@@ -10,7 +9,5 @@ variable =  "a" | "b" | "c" | "d" | "e" |
             "k" |       "m" | "n" | "o" |
             "p" | "q" | "r" | "s" | "t" |
             "u" | "v" | "w" | "x" | "y" | "z"
-openParen = "("
-closeParen = ")"
-
-unboundVariable = openParen variable closeParen
+openParen = "(";
+closeParen = ")";

@@ -1,4 +1,4 @@
-import {BOUND_VARIABLE, IExpression, LAMBDA, UNBOUND_VARIABLE} from '../model/model';
+import {BOUND_VARIABLE, IExpression, LAMBDA} from '../model/model';
 
 export default (ast: IExpression | null): string => {
   const handleNode = (node: IExpression | null, expression: string): string => {
@@ -11,9 +11,6 @@ export default (ast: IExpression | null): string => {
     }
     if (node.symbolType === BOUND_VARIABLE) {
       return recurse(`${node.variable})`);
-    }
-    if (node.symbolType === UNBOUND_VARIABLE) {
-      return recurse(`(${node.variable})`);
     }
     throw new Error(`Unknown symbol type ${node.symbolType}`);
   };
