@@ -15,6 +15,6 @@ describe('transpiler converts AST to JS', () => {
         }
       }
     });
-    expect(result).toEqual('(x => x)(y)')
+    expect(result).toEqual('(x => x)(y)');
   });
 });
