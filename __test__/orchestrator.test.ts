@@ -4,6 +4,7 @@ console.log = jest.fn()
 
 // These are essentially end-to-end tests
 describe('orchestrator transforms raw lambda into JS', () => {
+
   const SIMPLE_TEST_DATA: any = {
     identityFunction: {
       'lx.x': [
@@ -27,8 +28,13 @@ describe('orchestrator transforms raw lambda into JS', () => {
       'lx.ly.lz.x y z': [
         [[], 'x => y => z => (x)(y)(z)'],
       ]
+    },
+    omegaCombinator: {
+      'lx.xx': [
+        [[], 'x => (x)(x)']
+      ]
     }
-  }
+  };
 
   describe('Simple tests', () => {
     Object.keys(SIMPLE_TEST_DATA).forEach((exprName: string) => {

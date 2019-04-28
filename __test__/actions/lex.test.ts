@@ -17,4 +17,9 @@ describe('lexer splits strings into lexemes', () => {
       .toEqual(['lx.', 'ly.', 'lz.', 'x ', 'y ', 'z']);
   });
 
+  test('omega combinator', () => {
+    expect(lexer('lx.xx'))
+      .toEqual(['lx.', 'x', 'x']);
+  })
+
 });
