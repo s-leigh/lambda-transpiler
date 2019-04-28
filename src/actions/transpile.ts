@@ -10,9 +10,9 @@ export default (ast: IExpression | null): Function => {
       return recurse(`${node.variable} => `);
     }
     if (node.symbolType === BOUND_VARIABLE) {
-      return recurse(`${node.variable})`);
+      return recurse(`(${node.variable})`);
     }
     throw new Error(`Unknown symbol type ${node.symbolType}`);
   };
-  return eval(handleNode(ast, '('));
+  return eval(handleNode(ast, ''));
 };

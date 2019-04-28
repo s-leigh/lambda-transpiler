@@ -7,27 +7,55 @@ describe('orchestrator transforms raw lambda into JS', () => {
 
   describe('identity function', () => {
     test('without application', () => {
-      const result = handleInput('lx.x', [])
-      expect(result.toString()).toEqual('x => x');
+      const result = handleInput('lx.x', []);
+      expect(result.toString()).toEqual('x => (x)');
     });
 
     test('with application', () => {
-      const result = handleInput('lx.x', ['5'])
+      const result = handleInput('lx.x', ['5']);
       expect(result).toEqual('5');
     });
   });
 
-  describe('K combinator', () => {
+  describe('K combinator / true', () => {
     test('without application', () => {
-      const result = handleInput('lx.ly.x', [])
-      expect(result.toString()).toEqual('x => y => x');
+      const result = handleInput('lx.ly.x', []);
+      expect(result.toString()).toEqual('x => y => (x)');
     });
 
     test('with application', () => {
-      const result = handleInput('lx.ly.x', ['6', '7'])
+      const result = handleInput('lx.ly.x', ['6', '7']);
       expect(result.toString()).toEqual('6');
     });
   });
+
+  describe('false', () => {
+    test('without application', () => {
+      const result = handleInput('lx.ly.y', []);
+      expect(result.toString()).toEqual('x => y => (y)');
+    });
+
+    test('with application', () => {
+      const result = handleInput('lx.ly.y', ['3', '4']);
+      expect(result.toString()).toEqual('4');
+    });
+  })
+
+  describe('if', () => {
+    test('without application', () => {
+      const result = handleInput('lx.ly.lz.x y z', []);
+      expect(result.toString()).toEqual('x => y => z => (x)(y)(z)');
+    });
+
+    test('with application', () => {
+      // @ts-ignore
+      const result: Function = handleInput('lx.ly.lz.x y z', []);
+      // @ts-ignore
+      expect(result(x => y => x)('yarp')('narp')).toEqual('yarp');
+      // @ts-ignore
+      expect(result(x => y => y)('yarp')('narp')).toEqual('narp');
+    });
+  })
 
 });
 

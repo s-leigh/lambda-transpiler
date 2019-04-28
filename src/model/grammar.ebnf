@@ -1,4 +1,6 @@
-expr = {lambda variable [apply] [openParen] [closeParen]};
+expr = {lambdaVars} [closeParen];
+
+lambdaVars = lambda variable [apply] [variable | openParen];
 
 lambda = "l";
 apply = ".";

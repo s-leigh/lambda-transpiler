@@ -12,10 +12,10 @@ describe('transpiler converts AST to JS', () => {
         apply: null
       }
     });
-    expect(result.toString()).toEqual('x => x');
+    expect(result.toString()).toEqual('x => (x)');
   });
 
-  test('K combinator', () => {
+  test('K combinator / true', () => {
     const result = transpiler({
       symbolType: 'lambda',
       variable: 'x',
@@ -29,7 +29,36 @@ describe('transpiler converts AST to JS', () => {
         }
       }
     });
-    expect(result.toString()).toEqual('x => y => x');
+    expect(result.toString()).toEqual('x => y => (x)');
+  });
+
+  test('if', () => {
+    const result = transpiler({
+      symbolType: 'lambda',
+      variable: 'x',
+      apply: {
+        symbolType: 'lambda',
+        variable: 'y',
+        apply: {
+          symbolType: 'lambda',
+          variable: 'z',
+          apply: {
+            symbolType: 'boundVariable',
+            variable: 'x',
+            apply: {
+              symbolType: 'boundVariable',
+              variable: 'y',
+              apply: {
+                symbolType: 'boundVariable',
+                variable: 'z',
+                apply: null
+              }
+            }
+          }
+        }
+      }
+    });
+    expect(result.toString()).toEqual('x => y => z => (x)(y)(z)');
   });
 
 });
