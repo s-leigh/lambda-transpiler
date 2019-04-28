@@ -112,12 +112,12 @@ module.exports = {
   // rootDir: null,
 
   // A list of paths to directories that Jest should use to search for files in
-  // roots: [
-  //   "<rootDir>/__test__"
-  // ],
-  // "transform": {
-  //   "^.+\\.tsx?$": "ts-jest"
-  // },
+  roots: [
+    "<rootDir>/__test__"
+  ],
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",

@@ -7,7 +7,7 @@ describe('lexer splits strings into lexemes', () => {
       .toEqual(['lx.', 'x']);
   });
 
-  test('constant function', () => {
+  test('K combinator', () => {
     expect(lexer('lx.ly.x'))
       .toEqual(['lx.', 'ly.', 'x']);
   });

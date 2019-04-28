@@ -15,7 +15,7 @@ describe('parser converts lexemes to objects', () => {
     });
   });
 
-  test('constant function', () => {
+  test('K combinator', () => {
     const result = parser(['lx.', 'ly.', 'x']);
     expect(result).toEqual({
       symbolType: 'lambda',

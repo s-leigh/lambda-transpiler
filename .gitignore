@@ -1,4 +1,5 @@
 node_modules/
+build/
 .idea/
 src/**/*.js
 __test__/**/*.js

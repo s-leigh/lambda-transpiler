@@ -17,7 +17,7 @@ describe('orchestrator transforms raw lambda into JS', () => {
     });
   });
 
-  describe('constant function', () => {
+  describe('K combinator', () => {
     test('without application', () => {
       const result = handleInput('lx.ly.x', [])
       expect(result.toString()).toEqual('x => y => x');

@@ -15,7 +15,7 @@ describe('transpiler converts AST to JS', () => {
     expect(result.toString()).toEqual('x => x');
   });
 
-  test('constant function', () => {
+  test('K combinator', () => {
     const result = transpiler({
       symbolType: 'lambda',
       variable: 'x',
