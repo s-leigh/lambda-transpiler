@@ -4,67 +4,63 @@ console.log = jest.fn()
 
 // These are essentially end-to-end tests
 describe('orchestrator transforms raw lambda into JS', () => {
+  const SIMPLE_TEST_DATA: any = {
+    identityFunction: {
+      'lx.x': [
+        [[], 'x => (x)'],
+        [['5'], '5']
+      ]
+    },
+    kCombinatorTrue: {
+      'lx.ly.x': [
+        [[], 'x => y => (x)'],
+        [['6', '7'], '6']
+      ]
+    },
+    falseCombinator: {
+      'lx.ly.y': [
+        [[], 'x => y => (y)'],
+        [['6', '7'], '7']
+      ]
+    },
+    ifCombinator: {
+      'lx.ly.lz.x y z': [
+        [[], 'x => y => z => (x)(y)(z)'],
+      ]
+    }
+  }
 
-  describe('identity function', () => {
-    test('without application', () => {
-      const result = handleInput('lx.x', []);
-      expect(result.toString()).toEqual('x => (x)');
-    });
-
-    test('with application', () => {
-      const result = handleInput('lx.x', ['5']);
-      expect(result).toEqual('5');
+  describe('Simple tests', () => {
+    Object.keys(SIMPLE_TEST_DATA).forEach((exprName: string) => {
+      Object.keys(SIMPLE_TEST_DATA[exprName]).forEach((primaryInput: string) => {
+         SIMPLE_TEST_DATA[exprName][primaryInput].forEach((testCase: string[][]) => {
+           const args = testCase[0];
+           const expectedResult = testCase[1];
+          test(`${exprName} ${primaryInput} ${args} === ${expectedResult}`, () => {
+            expect(handleInput(primaryInput, args).toString()).toEqual(testCase[1]);
+          });
+        });
+      });
     });
   });
 
-  describe('K combinator / true', () => {
-    test('without application', () => {
-      const result = handleInput('lx.ly.x', []);
-      expect(result.toString()).toEqual('x => y => (x)');
-    });
-
-    test('with application', () => {
-      const result = handleInput('lx.ly.x', ['6', '7']);
-      expect(result.toString()).toEqual('6');
-    });
+  test('if combinator with application', () => {
+    // @ts-ignore
+    const result: Function = handleInput('lx.ly.lz.x y z', []);
+    // @ts-ignore
+    expect(result(x => y => x)('yarp')('narp')).toEqual('yarp');
+    // @ts-ignore
+    expect(result(x => y => y)('yarp')('narp')).toEqual('narp');
   });
-
-  describe('false', () => {
-    test('without application', () => {
-      const result = handleInput('lx.ly.y', []);
-      expect(result.toString()).toEqual('x => y => (y)');
-    });
-
-    test('with application', () => {
-      const result = handleInput('lx.ly.y', ['3', '4']);
-      expect(result.toString()).toEqual('4');
-    });
-  })
-
-  describe('if', () => {
-    test('without application', () => {
-      const result = handleInput('lx.ly.lz.x y z', []);
-      expect(result.toString()).toEqual('x => y => z => (x)(y)(z)');
-    });
-
-    test('with application', () => {
-      // @ts-ignore
-      const result: Function = handleInput('lx.ly.lz.x y z', []);
-      // @ts-ignore
-      expect(result(x => y => x)('yarp')('narp')).toEqual('yarp');
-      // @ts-ignore
-      expect(result(x => y => y)('yarp')('narp')).toEqual('narp');
-    });
-  })
 
 });
 
 describe('orchestrator handles bad input', () => {
   test('throws error when too many args are specified', () => {
-    expect(() => handleInput('lx.x', ['1', '2'])).toThrow()
-  })
+    expect(() => handleInput('lx.x', ['1', '2'])).toThrow();
+  });
 
   test('throws error when handed non-lambda expression', () => {
-    expect(() => handleInput('notALambda', ['1'])).toThrow()
-  })
+    expect(() => handleInput('notALambda', ['1'])).toThrow();
+  });
 })
