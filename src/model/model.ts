@@ -1,4 +1,3 @@
-
 const LAMBDA_CHARS = '(l|λ)';
 export const LAMBDA_CHARS_MATCHER = new RegExp(LAMBDA_CHARS);
 
@@ -8,8 +7,11 @@ export const REGEXES = {
   unboundVariable: /\([a-km-z]\)/
 };
 
-export const LAMBDA = 'lambda';
-export const BOUND_VARIABLE = 'boundVariable';
+const LAMBDA = 'lambda';
+const BOUND_VARIABLE = 'boundVariable';
+
+export const isLambda = (expr: IExpression) => expr.symbolType === LAMBDA;
+export const isBoundVariable = (expr: IExpression) => expr.symbolType === BOUND_VARIABLE;
 
 export class Lambda implements IExpression {
   public symbolType = LAMBDA;

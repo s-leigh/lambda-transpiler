@@ -1,32 +1,29 @@
 import {BoundVariable, IExpression, Lambda, REGEXES} from '../model/model';
+import { tail } from '../helpers';
 
-export default (lexemes: string[]): IExpression => {
-
-  const handleLexeme = (lexeme: string, index: number, lexemeArray: string[]): IExpression => {
-    const nextIndex = index + 1;
-    const nextLexeme = lexemeArray[nextIndex];
-    // lx[. ?]
-    const parseLambda = (token: string): IExpression => {
-      return new Lambda(token[1], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
-    };
-    const parseBoundVariable = (token: string): IExpression => {
-      return new BoundVariable(token[0], nextLexeme ? handleLexeme(nextLexeme, nextIndex, lexemeArray) : null);
-    };
-
-    const returnable: Array<(token: string) => IExpression> = [];
-    if (lexeme.match(REGEXES.lambda)) returnable.push(parseLambda);
-    if (lexeme.match(REGEXES.boundVariable)) returnable.push(parseBoundVariable);
-    if (returnable.length > 1) throw new Error(
-      `Parser returned more than one possible interpretation for lexeme:
-      '${lexeme}'
-      ${returnable}`
-    );
-    if (returnable.length === 0) throw new Error(
-      `Parser cold not interpret lexeme:\n'${lexeme}'`
-    );
-
-    return returnable[0](lexeme);
+export default function parse(lexemeArray: string[]): IExpression {
+  const handleNextLexeme = () => lexemeArray[1] ? parse(tail(lexemeArray)) : null
+  const parseLambda = (lexeme: string): IExpression => {
+    return new Lambda(lexeme[1], handleNextLexeme());
   };
+  const parseBoundVariable = (lexeme: string): IExpression => {
+    return new BoundVariable(lexeme[0], handleNextLexeme());
+  };
+  
+  const lexeme = lexemeArray[0];
+  // handle possibility of parser identifying lexeme as more than one type of thing
+  const parseFn: Array<(lexeme: string) => IExpression> = [];
+  if (lexeme.match(REGEXES.lambda)) parseFn.push(parseLambda);
+  if (lexeme.match(REGEXES.boundVariable)) parseFn.push(parseBoundVariable);
 
-  return handleLexeme(lexemes[0], 0, lexemes);
+  if (parseFn.length > 1) throw new Error(
+    `Parser returned more than one possible interpretation for lexeme:
+    '${lexeme}'
+    ${parseFn}`
+  );
+  if (parseFn.length === 0) throw new Error(
+    `Parser cold not interpret lexeme:\n'${lexeme}'`
+  );
+
+  return parseFn[0](lexeme);
 };
