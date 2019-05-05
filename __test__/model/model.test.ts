@@ -1,6 +1,5 @@
 import { isLambda, isBoundVariable } from "../../src/model/model";
 
-
 describe('model correctly identifies expression types', () => {
   test('lambda', () => {
     const obj = {
