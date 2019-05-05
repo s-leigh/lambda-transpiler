@@ -1,5 +1,5 @@
 import {BoundVariable, IExpression, Lambda, REGEXES} from '../model/model';
-import { tail } from '../helpers';
+import { tail } from '../helpers/arrayHelpers';
 
 export default function parse(lexemeArray: string[]): IExpression {
   const handleNextLexeme = () => lexemeArray[1] ? parse(tail(lexemeArray)) : null

@@ -1,10 +1,5 @@
 import { LAMBDA_CHARS_MATCHER } from "../model/model";
-
-const flatten = (arr: any): string[] => {
-  return arr.reduce(function (flat: string[], toFlatten: any) {
-    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-  }, []);
-}
+import { flatten } from "../helpers/arrayHelpers";
 
 const fullLambdaExpression = (lexeme: string) => 
   lexeme.match(LAMBDA_CHARS_MATCHER) ||

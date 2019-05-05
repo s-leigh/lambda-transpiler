@@ -1,7 +1,7 @@
 import lex from "./actions/lex";
 import parse from "./actions/parse";
 import transpile from "./actions/transpile";
-import { tail, head } from "./helpers";
+import { tail, head } from "./helpers/arrayHelpers";
 
 const applyArgs = (args: string[], lambda: Function): Function | string => {
   if (!args.length) return lambda;
