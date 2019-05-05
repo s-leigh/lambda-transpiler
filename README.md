@@ -1,4 +1,4 @@
-# Lambda Compiler
+# Lambda Transpiler
 
 Takes a basic lambda calculus expression in the form e.g.
 `lx.ly.x` or `λx.λy.x`

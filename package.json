@@ -1,5 +1,5 @@
 {
-  "name": "lambda-compiler",
+  "name": "lambda-transpiler",
   "version": "1.0.0",
   "description": "",
   "scripts": {
