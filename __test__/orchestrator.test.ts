@@ -10,10 +10,18 @@ describe('orchestrator transforms raw lambda into JS', () => {
       'lx.x': [
         [[], 'x => (x)'],
         [['5'], '5']
+      ],
+      'λx.x': [
+        [[], 'x => (x)'],
+        [['5'], '5']
       ]
     },
     kCombinatorTrue: {
       'lx.ly.x': [
+        [[], 'x => y => (x)'],
+        [['6', '7'], '6']
+      ],
+      'λx.λy.x': [
         [[], 'x => y => (x)'],
         [['6', '7'], '6']
       ]
@@ -22,15 +30,25 @@ describe('orchestrator transforms raw lambda into JS', () => {
       'lx.ly.y': [
         [[], 'x => y => (y)'],
         [['6', '7'], '7']
+      ],
+      'λx.λy.y': [
+        [[], 'x => y => (y)'],
+        [['6', '7'], '7']
       ]
     },
     ifCombinator: {
       'lx.ly.lz.x y z': [
         [[], 'x => y => z => (x)(y)(z)'],
+      ],
+      'λx.λy.λz.x y z': [
+        [[], 'x => y => z => (x)(y)(z)'],
       ]
     },
     omegaCombinator: {
       'lx.xx': [
+        [[], 'x => (x)(x)']
+      ],
+      'λx.xx': [
         [[], 'x => (x)(x)']
       ]
     }
@@ -40,8 +58,8 @@ describe('orchestrator transforms raw lambda into JS', () => {
     Object.keys(SIMPLE_TEST_DATA).forEach((exprName: string) => {
       Object.keys(SIMPLE_TEST_DATA[exprName]).forEach((primaryInput: string) => {
          SIMPLE_TEST_DATA[exprName][primaryInput].forEach((testCase: string[][]) => {
-           const args = testCase[0];
-           const expectedResult = testCase[1];
+          const args = testCase[0];
+          const expectedResult = testCase[1];
           test(`${exprName} ${primaryInput} ${args} === ${expectedResult}`, () => {
             expect(handleInput(primaryInput, args).toString()).toEqual(testCase[1]);
           });

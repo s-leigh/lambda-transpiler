@@ -6,8 +6,7 @@
     "jest": "./node_modules/jest/bin/jest.js",
     "lint": "./node_modules/tslint/bin/tslint --project tslint.json",
     "start": "tsc && node build/src/entrypoint.js",
-    "test": "./node_modules/typescript/bin/tsc && ./node_modules/jest/bin/jest.js",
-    "testwin": "node ./node_modules/typescript/bin/tsc && node ./node_modules/jest/bin/jest.js",
+    "test": "node ./node_modules/typescript/bin/tsc && node ./node_modules/jest/bin/jest.js",
     "tsc": "npx tsc"
   },
   "author": "Stephen Leigh",

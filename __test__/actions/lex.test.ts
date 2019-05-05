@@ -2,9 +2,14 @@ import lexer from '../../src/actions/lex';
 
 describe('lexer splits strings into lexemes', () => {
 
-  test('identity function', () => {
+  test('identity function with \'l\'', () => {
     expect(lexer('lx.x'))
       .toEqual(['lx.', 'x']);
+  });
+
+  test('identity function with \'λ\'', () => {
+    expect(lexer('λx.x'))
+      .toEqual(['λx.', 'x']);
   });
 
   test('K combinator / true', () => {

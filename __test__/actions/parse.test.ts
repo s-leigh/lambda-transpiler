@@ -2,8 +2,21 @@ import parser from '../../src/actions/parse';
 
 describe('parser converts lexemes to objects', () => {
 
-  test('identity function', () => {
+  test('identity function with \'l\'', () => {
     const result = parser(['lx.', 'x']);
+    expect(result).toEqual({
+      symbolType: 'lambda',
+      variable: 'x',
+      apply: {
+        symbolType: 'boundVariable',
+        variable: 'x',
+        apply: null
+      }
+    });
+  });
+
+  test('identity function with \'λ\'', () => {
+    const result = parser(['λx.', 'x']);
     expect(result).toEqual({
       symbolType: 'lambda',
       variable: 'x',

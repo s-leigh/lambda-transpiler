@@ -1,6 +1,10 @@
+
+const LAMBDA_CHARS = '(l|λ)';
+export const LAMBDA_CHARS_MATCHER = new RegExp(LAMBDA_CHARS);
+
 export const REGEXES = {
   boundVariable: /[a-km-z]( ?)(?!.)/,
-  lambda: /l[a-km-z][.]/,
+  lambda: new RegExp(LAMBDA_CHARS + '[a-km-z][.]'),
   unboundVariable: /\([a-km-z]\)/
 };
 
